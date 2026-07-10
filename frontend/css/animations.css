@@ -1,0 +1,112 @@
+/* ══════════════════════════════════════════
+   JARVIS v5.0 — KEYFRAMES AND HUD TRANSITIONS
+   ══════════════════════════════════════════ */
+
+@keyframes spinCW   { to { transform: rotate(360deg); } }
+@keyframes spinCCW  { to { transform: rotate(-360deg); } }
+@keyframes blink    { 0%,100%{opacity:1} 50%{opacity:0.25} }
+
+@keyframes coreIdle {
+    0%,100% { transform:scale(1);    box-shadow:0 0 40px var(--v2), 0 0 90px rgba(168,85,247,0.35); }
+    50%     { transform:scale(1.12); box-shadow:0 0 60px var(--v2), 0 0 130px rgba(168,85,247,0.55); }
+}
+@keyframes coreListening {
+    0%,100% { transform:scale(1);    box-shadow:0 0 50px var(--g1), 0 0 100px rgba(16,185,129,0.4); }
+    50%     { transform:scale(1.1);  box-shadow:0 0 70px var(--g1), 0 0 140px rgba(16,185,129,0.6); }
+}
+@keyframes coreSpeaking {
+    0%,100% { transform:scale(1);    box-shadow:0 0 55px var(--p2), 0 0 110px rgba(244,114,182,0.5); }
+    50%     { transform:scale(1.2);  box-shadow:0 0 80px var(--p2), 0 0 160px rgba(244,114,182,0.7); }
+}
+@keyframes innerPulse {
+    0%,100% { opacity:0.9; transform:scale(1); }
+    50%     { opacity:0.4; transform:scale(0.7); }
+}
+@keyframes nameFlicker {
+    0%,100%{opacity:1} 91%{opacity:1} 92%{opacity:0.7} 93%{opacity:1} 97%{opacity:0.85} 98%{opacity:1}
+}
+
+@keyframes spinCW3d {
+    from { transform: translate3d(-50%, -50%, var(--z-depth, 0px)) rotate(0deg); }
+    to { transform: translate3d(-50%, -50%, var(--z-depth, 0px)) rotate(360deg); }
+}
+@keyframes spinCCW3d {
+    from { transform: translate3d(-50%, -50%, var(--z-depth, 0px)) rotate(0deg); }
+    to { transform: translate3d(-50%, -50%, var(--z-depth, 0px)) rotate(-360deg); }
+}
+
+@keyframes reminderIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes widle    { 0%,100%{height:4px} 50%{height:14px} }
+@keyframes wlisten  { 0%,100%{height:5px} 50%{height:42px} }
+@keyframes wspeak   { 0%,100%{height:8px} 50%{height:46px} }
+
+/* Apply animations to structural widgets */
+.cr-outer { animation: spinCW 12s linear infinite; }
+.cr-mid { animation: spinCCW 18s linear infinite; }
+.cr-inner { animation: spinCW 8s linear infinite; }
+
+.ch1 { animation: spinCW 22s linear infinite; }
+.ch2 { animation: spinCCW 28s linear infinite; }
+.ch3 { animation: spinCW 35s linear infinite; }
+
+.orbit-1 { animation: spinCW3d 40s linear infinite; }
+.orbit-2 { animation: spinCCW3d 55s linear infinite; }
+.orbit-3 { animation: spinCW3d 30s linear infinite; }
+.orbit-4 { animation: spinCCW3d 20s linear infinite; }
+
+.core-ball { animation: coreIdle 3s ease-in-out infinite; }
+.core-inner-pulse { animation: innerPulse 1.5s ease-in-out infinite; }
+.saturn-ring { animation: spinCW 25s linear infinite; }
+.rl-name { animation: nameFlicker 7s ease-in-out infinite; }
+
+.wbar {
+    animation: widle 2s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.08s);
+}
+.waveform.listening .wbar {
+    animation: wlisten 0.55s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.05s);
+}
+.waveform.speaking .wbar {
+    animation: wspeak 0.3s ease-in-out infinite;
+    animation-delay: calc(var(--i) * 0.04s);
+}
+
+.reminder-item {
+    animation: reminderIn 0.3s ease;
+}
+
+/* Reactor Pulse on Landing Page */
+.reactor-pulse-landing {
+    position: relative;
+    width: 140px; height: 140px;
+    margin: 40px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.core-glow-landing {
+    width: 60px; height: 60px;
+    background: radial-gradient(circle, #ffffff 0%, var(--v2) 40%, var(--v1) 80%, transparent 100%);
+    border-radius: 50%;
+    box-shadow: 0 0 35px var(--v2), 0 0 70px rgba(168, 85, 247, 0.4);
+    animation: coreIdle 4s ease-in-out infinite;
+}
+.ring-pulse {
+    position: absolute;
+    width: 100%; height: 100%;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+    border-radius: 50%;
+    animation: spinCW 20s linear infinite;
+}
+.ring-pulse-inner {
+    position: absolute;
+    width: 80%; height: 80%;
+    border: 1px dashed rgba(244, 114, 182, 0.15);
+    border-radius: 50%;
+    animation: spinCCW 15s linear infinite;
+}

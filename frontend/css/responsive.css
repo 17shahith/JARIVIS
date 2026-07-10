@@ -1,0 +1,82 @@
+/* ══════════════════════════════════════════
+   JARVIS v5.0 — RESPONSIVE SCALING STYLES
+   ══════════════════════════════════════════ */
+
+@media (max-height: 800px) {
+    :root {
+        --core-size: 160px;
+        --orbit-r: 190px;
+        --node-size: 52px;
+    }
+    #fpConsole {
+        height: 190px;
+    }
+    .log-scroll {
+        max-height: 130px;
+    }
+    .waveform {
+        top: calc(50% + var(--orbit-r) + calc(var(--node-size) / 2) + 38px);
+    }
+}
+
+@media (max-width: 1024px) {
+    .float-panel {
+        position: relative;
+        width: 100%;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin-bottom: 16px;
+    }
+    .fp-left, .fp-right-stack {
+        position: relative;
+        width: 90%;
+        max-width: 480px;
+        top: auto !important;
+        left: auto !important;
+        right: auto !important;
+        margin: 10px auto;
+    }
+    .stage {
+        height: auto;
+        min-height: 100vh;
+        overflow-y: auto;
+    }
+    .reactor-stage {
+        padding: 100px 0;
+        min-height: 500px;
+    }
+    .command-bar {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: calc(100% - 20px);
+        max-width: 480px;
+        z-index: 100;
+    }
+}
+
+@media (max-width: 600px) {
+    .hud-topbar {
+        padding: 8px 12px;
+    }
+    .logo-main {
+        font-size: 0.7rem;
+        letter-spacing: 3px;
+    }
+    .live-clock {
+        font-size: 0.85rem;
+    }
+    .logout-hud-btn {
+        font-size: 0.45rem;
+        padding: 4px 8px;
+    }
+    .command-bar {
+        min-width: 0;
+    }
+    .cmd-input {
+        min-width: 100px;
+        font-size: 0.65rem;
+    }
+}

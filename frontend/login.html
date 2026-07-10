@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS | System Login</title>
+    <link rel="stylesheet" href="css/style.css?v=11">
+    <link rel="stylesheet" href="css/animations.css?v=11">
+</head>
+<body class="landing-body">
+
+    <canvas id="bgCanvas"></canvas>
+    <div class="scanline"></div>
+
+    <div class="landing-container login-form-container glass-surface">
+        <div class="landing-header">
+            <div class="logo-large">SECURE LINK</div>
+            <div class="sub-logo">SYSTEM IDENTITY AUTHENTICATION</div>
+        </div>
+
+        <div class="alert-box" id="alertBox" style="display: none;"></div>
+
+        <form id="loginForm" class="auth-form">
+            <div class="form-group">
+                <label for="username">OPERATOR ID</label>
+                <input type="text" id="username" class="cmd-input auth-input" placeholder="Enter Username..." autocomplete="off" required>
+            </div>
+            <div class="form-group">
+                <label for="password">ACCESS DECRYPT PASSCODE</label>
+                <input type="password" id="password" class="cmd-input auth-input" placeholder="Enter Passcode..." required>
+            </div>
+            <div class="form-actions">
+                <button type="submit" class="launch-btn auth-btn" id="btnLogin">VERIFY IDENTITY</button>
+                <button type="button" class="launch-btn secondary-launch-btn auth-btn" id="btnRegister">REGISTER OPERATOR</button>
+            </div>
+        </form>
+
+        <div class="offline-note" style="margin-top: 15px; font-family: monospace; font-size: 0.65rem; color: #a78bfa; opacity: 0.8; text-align: center;">
+            Offline Mode: Username "jarvis" / Passcode "admin"
+        </div>
+    </div>
+
+    <script src="js/ui.js?v=11"></script>
+    <script>
+        const alertBox = document.getElementById('alertBox');
+        const loginForm = document.getElementById('loginForm');
+        
+        const showAlert = (msg, type = 'err') => {
+            alertBox.style.display = 'block';
+            alertBox.innerText = `> ${msg}`;
+            alertBox.style.color = type === 'success' ? '#10b981' : '#ef4444';
+        };
+
+        const handleAuth = async (endpoint) => {
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) return;
+            
+            try {
+                const res = await fetch(`/api/auth/${endpoint}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                const data = await res.json();
+                
+                if (!res.ok || data.error) {
+                    throw new Error(data.error || 'Server connection failed.');
+                }
+                
+                if (endpoint === 'login') {
+                    localStorage.setItem('token', data.token);
+                    showAlert('ACCESS GRANTED. LOADING NEURAL INTERFACE...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'dashboard.html';
+                    }, 1200);
+                } else {
+                    showAlert('REGISTRATION SUCCESSFUL. VERIFY IDENTITY TO CONNECT.', 'success');
+                }
+            } catch (err) {
+                showAlert(err.message);
+            }
+        };
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            handleAuth('login');
+        });
+
+        document.getElementById('btnRegister').addEventListener('click', () => {
+            handleAuth('register');
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,257 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ══════════════════════════════════════════
+   JARVIS v5.0 — DYNAMIC DESIGN SYSTEM (STYLE)
+   ══════════════════════════════════════════ */
+:root {
+    /* DEFAULT COLORS (VIOLET DEFAULT) */
+    --v1: #7c3aed;   /* deep primary */
+    --v2: #a855f7;   /* primary */
+    --v3: #d8b4fe;   /* light primary */
+    --dim: #6b4f8a;  /* dim primary */
+    --glass-b: rgba(168, 85, 247, 0.18);
+    --glass-h: rgba(168, 85, 247, 0.38);
+
+    --p1: #db2777;   /* deep pink */
+    --p2: #f472b6;   /* pink */
+    --i1: #4f46e5;   /* indigo */
+    --g1: #10b981;   /* green */
+    --r1: #f87171;   /* red */
+    --y1: #fbbf24;   /* yellow */
+    --bg: #000000;   /* pure black */
+    --glass: rgba(0, 0, 0, 0.88);
+    --text: #ede9fe;
+    
+    --font-h: 'Orbitron', sans-serif;
+    --font-b: 'Rajdhani', sans-serif;
+    --font-m: 'Share Tech Mono', monospace;
+
+    /* Responsive scaling tokens to prevent overlap on small screens */
+    --core-size: min(195px, 22vh);
+    --orbit-r: min(245px, 25vh);
+    --node-size: min(62px, 7vh);
+}
+
+/* THEMES CONFIGURATION */
+body.theme-violet {
+    --v1: #7c3aed;
+    --v2: #a855f7;
+    --v3: #d8b4fe;
+    --dim: #6b4f8a;
+    --glass-b: rgba(168, 85, 247, 0.18);
+    --glass-h: rgba(168, 85, 247, 0.38);
+}
+body.theme-amber {
+    --v1: #92400e;   /* deep amber */
+    --v2: #d97706;   /* amber */
+    --v3: #fde68a;   /* light amber */
+    --dim: #78350f;   /* dim amber */
+    --glass-b: rgba(217, 119, 6, 0.18);
+    --glass-h: rgba(217, 119, 6, 0.38);
+}
+body.theme-emerald {
+    --v1: #065f46;   /* deep emerald */
+    --v2: #059669;   /* emerald */
+    --v3: #a7f3d0;   /* light emerald */
+    --dim: #064e3b;   /* dim emerald */
+    --glass-b: rgba(5, 150, 105, 0.18);
+    --glass-h: rgba(5, 150, 105, 0.38);
+}
+body.theme-cyber {
+    --v1: #1e3a8a;   /* deep cyber blue */
+    --v2: #2563eb;   /* cyber blue */
+    --v3: #93c5fd;   /* light cyber blue */
+    --dim: #1d4ed8;   /* dim cyber blue */
+    --glass-b: rgba(37, 99, 235, 0.18);
+    --glass-h: rgba(37, 99, 235, 0.38);
+}
+
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+    background: #000000;
+    color: var(--text);
+    font-family: var(--font-b);
+    width: 100vw; height: 100vh;
+    overflow: hidden;
+    user-select: none;
+    transition: background 0.5s ease;
+}
+
+/* ── CANVAS BG ── */
+#bgCanvas {
+    position: fixed; inset: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* ── SCANLINE (subtle overlay) ── */
+.scanline {
+    position: fixed; inset: 0; z-index: 9999;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent, transparent 2px,
+        rgba(168,85,247,0.01) 2px,
+        rgba(168,85,247,0.01) 4px
+    );
+}
+
+/* ── GLASS SURFACE ── */
+.glass-surface {
+    background: var(--glass);
+    backdrop-filter: blur(28px);
+    -webkit-backdrop-filter: blur(28px);
+    border: 1px solid var(--glass-b);
+    border-radius: 16px;
+    box-shadow:
+        0 8px 60px rgba(0,0,0,0.7),
+        inset 0 1px 0 rgba(168,85,247,0.1);
+    position: relative;
+    overflow: hidden;
+}
+.glass-surface::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--v2), transparent);
+    opacity: 0.5;
+}
+
+/* ── LANDING PAGE STYLING ── */
+.landing-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+}
+.landing-container {
+    width: 480px;
+    padding: 40px;
+    text-align: center;
+    border-radius: 24px;
+    z-index: 10;
+}
+.landing-header {
+    margin-bottom: 30px;
+}
+.logo-large {
+    font-family: var(--font-h);
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 12px;
+    background: linear-gradient(90deg, var(--v2), var(--p2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 30px rgba(168,85,247,0.3);
+}
+.sub-logo {
+    font-family: var(--font-m);
+    font-size: 0.65rem;
+    color: var(--dim);
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+.landing-description {
+    font-family: var(--font-b);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 35px;
+    letter-spacing: 1px;
+}
+.launch-btn {
+    width: 100%;
+    padding: 14px 28px;
+    font-family: var(--font-h);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    color: #ffffff;
+    background: linear-gradient(135deg, var(--v1), var(--dim));
+    border: 1px solid var(--v2);
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    transition: all 0.3s ease;
+}
+.launch-btn:hover {
+    background: linear-gradient(135deg, var(--v2), var(--v1));
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
+    transform: translateY(-2px);
+}
+.secondary-launch-btn {
+    background: rgba(168, 85, 247, 0.08);
+    border-color: rgba(168, 85, 247, 0.3);
+    margin-top: 10px;
+    box-shadow: none;
+}
+.secondary-launch-btn:hover {
+    background: rgba(168, 85, 247, 0.18);
+    border-color: var(--v2);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+}
+.system-status-landing {
+    margin-top: 25px;
+    font-family: var(--font-m);
+    font-size: 0.6rem;
+    color: var(--g1);
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+.pulse-green {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background-color: var(--g1);
+    box-shadow: 0 0 8px var(--g1);
+    display: inline-block;
+    animation: blink 2s infinite;
+}
+
+/* ── FORMS & ALERTS ── */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    text-align: left;
+}
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-group label {
+    font-family: var(--font-h);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--v3);
+}
+.auth-input {
+    width: 100% !important;
+    background: rgba(0,0,0,0.5) !important;
+    border: 1px solid var(--glass-b) !important;
+    color: var(--text) !important;
+    font-family: var(--font-m) !important;
+    font-size: 0.85rem !important;
+    padding: 12px 16px !important;
+    border-radius: 8px !important;
+}
+.auth-input:focus {
+    border-color: var(--v2) !important;
+    box-shadow: 0 0 12px rgba(168,85,247,0.2) !important;
+}
+.alert-box {
+    padding: 12px;
+    border-radius: 8px;
+    font-family: var(--font-m);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 20px;
+}

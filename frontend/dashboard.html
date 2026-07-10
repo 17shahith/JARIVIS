@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JARVIS | Neural Interface</title>
+    <meta name="description" content="JARVIS — Immersive AI Neural Interface">
+    <link rel="stylesheet" href="css/style.css?v=11">
+    <link rel="stylesheet" href="css/dashboard.css?v=11">
+    <link rel="stylesheet" href="css/animations.css?v=11">
+    <link rel="stylesheet" href="css/responsive.css?v=11">
+</head>
+<body class="dashboard-body">
+
+    <!-- Deep space background -->
+    <canvas id="bgCanvas"></canvas>
+
+    <!-- Scanline CRT overlay -->
+    <div class="scanline"></div>
+
+    <!-- ── FULL SCREEN REACTOR STAGE ── -->
+    <div class="stage" id="stage">
+
+        <!-- Top HUD Bar -->
+        <header class="hud-topbar glass-surface">
+            <div class="topbar-left">
+                <div class="logo-mark">J</div>
+                <div class="logo-text">
+                    <span class="logo-main">J.A.R.V.I.S.</span>
+                    <span class="logo-sub">NEURAL INTERFACE v5.0</span>
+                </div>
+            </div>
+            <div class="topbar-center">
+                <div class="status-chip" id="stateChip">
+                    <span class="chip-dot" id="chipDot"></span>
+                    <span class="chip-label" id="chipLabel">STANDBY</span>
+                </div>
+            </div>
+            <div class="topbar-right">
+                <div class="live-clock" id="liveClock">--:--:--</div>
+                <div class="live-date" id="liveDate">---</div>
+                <button class="logout-hud-btn" id="btnLogoutOperator" title="Disconnect interface">DISCONNECT</button>
+            </div>
+        </header>
+
+        <!-- ── MAIN REACTOR ── -->
+        <div class="reactor-stage">
+
+            <!-- Orbit rings (decorative) -->
+            <div class="orbit orbit-1"></div>
+            <div class="orbit orbit-2"></div>
+            <div class="orbit orbit-3"></div>
+            <div class="orbit orbit-4"></div>
+
+            <!-- Floating quick-action nodes around reactor -->
+            <div class="node-orbit">
+                <div class="orbit-node weather-widget node-0" id="weatherWidget" title="Click for weather report">
+                    <div class="weather-top">
+                        <span class="weather-emoji" id="weatherEmoji">🌤️</span>
+                        <span class="weather-temp" id="weatherTemp">--°C</span>
+                    </div>
+                    <div class="weather-city" id="weatherCity">LOADING...</div>
+                    <div class="weather-cond" id="weatherCond">Awaiting sync</div>
+                </div>
+                <button class="orbit-node node-1" id="btnYoutube"   title="YouTube">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="#FF0000" d="M23.498 6.163a3.003 3.003 0 0 0-2.11-2.108C19.53 3.5 12 3.5 12 3.5s-7.53 0-9.388.555A3.002 3.002 0 0 0 .503 6.163C0 8.018 0 12 0 12s0 3.982.503 5.837a3.003 3.003 0 0 0 2.11 2.108C4.47 20.5 12 20.5 12 20.5s7.53 0 9.388-.555a3.002 3.002 0 0 0 2.11-2.108C24 15.982 24 12 24 12s0-3.982-.502-5.837zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">YT</span>
+                </button>
+                <button class="orbit-node node-2" id="btnGoogle"    title="Google">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">GOOG</span>
+                </button>
+                <button class="orbit-node node-3" id="btnSpotify"   title="Spotify">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="#1DB954" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.565.387-.86.207-2.377-1.454-5.37-1.783-8.894-.982-.336.075-.668-.135-.744-.47-.077-.337.135-.668.47-.745 3.856-.88 7.15-.5 9.822 1.137.294.18.385.565.206.86zm1.225-2.72c-.227.367-.707.487-1.074.26-2.72-1.672-6.87-2.157-10.082-1.182-.413.125-.847-.107-.972-.52-.125-.413.108-.847.52-.972 3.673-1.114 8.243-.57 11.35 1.343.366.226.486.707.26 1.074zm.106-2.833C14.39 8.784 8.57 8.592 5.207 9.613c-.517.157-1.066-.135-1.224-.653-.158-.518.134-1.067.652-1.225 3.86-1.172 10.29-.953 14.354 1.46.467.278.62.883.343 1.35-.278.467-.883.62-1.35.342z"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">SPOT</span>
+                </button>
+                <button class="orbit-node node-4" id="btnWhatsApp"  title="WhatsApp">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="#25D366" d="M12.004 2C6.48 2 2 6.48 2 12.004c0 1.765.46 3.42 1.258 4.887L2 22l5.223-1.371a9.946 9.946 0 0 0 4.781 1.22c5.52 0 10-4.48 10-10.005C22.004 6.48 17.524 2 12.004 2zm0 1.836c4.507 0 8.168 3.662 8.168 8.168 0 4.507-3.661 8.169-8.168 8.169a8.127 8.127 0 0 1-4.148-1.129l-.297-.176-3.084.81.823-3.007-.193-.308a8.136 8.136 0 0 1-1.251-4.359c0-4.506 3.661-8.168 8.168-8.168zm-3.606 3.593c-.198 0-.411.034-.593.18-.215.172-.83.812-.83 1.98s.85 2.298.968 2.457c.12.158 1.67 2.548 4.043 3.57.564.243 1.006.39 1.349.5.567.18 1.083.154 1.492.093.456-.068 1.4-.572 1.6-1.125.2-.553.2-1.026.14-1.125-.06-.1-.22-.158-.458-.278-.238-.12-1.4-.69-1.62-.77-.218-.08-.376-.12-.534.12-.159.238-.614.77-.753.93-.138.158-.277.178-.515.06-.237-.12-1.002-.37-1.91-1.18-.705-.63-1.18-1.408-1.318-1.646-.139-.237-.015-.366.104-.484.108-.107.238-.278.356-.417.12-.139.159-.238.238-.396.08-.159.04-.297-.02-.416-.06-.12-.535-1.288-.733-1.764-.19-.46-.39-.396-.534-.403a6.76 6.76 0 0 0-.456-.007z"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">WA</span>
+                </button>
+                <button class="orbit-node node-5" id="btnInstagram" title="Instagram">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <defs>
+                                <radialGradient id="igGrad" cx="0.2" cy="0.9" r="1.2">
+                                    <stop offset="0%" stop-color="#fdf497" />
+                                    <stop offset="5%" stop-color="#fdf497" />
+                                    <stop offset="45%" stop-color="#fd5949" />
+                                    <stop offset="60%" stop-color="#d6249f" />
+                                    <stop offset="90%" stop-color="#285AEB" />
+                                </radialGradient>
+                            </defs>
+                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5" fill="url(#igGrad)"/>
+                            <path fill="#ffffff" d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zm0 8.2c-1.76 0-3.2-1.44-3.2-3.2s1.44-3.2 3.2-3.2 3.2 1.44 3.2 3.2-1.44 3.2-3.2 3.2z"/>
+                            <circle fill="#ffffff" cx="16.75" cy="7.25" r="1.25"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">INSTA</span>
+                </button>
+                <button class="orbit-node node-6" id="btnGmail"     title="Gmail">
+                    <span class="node-icon">
+                        <svg viewBox="0 0 24 24" width="24" height="24">
+                            <path fill="#EA4335" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/>
+                            <path fill="#FFFFFF" d="M22 6v1.5L12 14 2 7.5V6c0-.4.2-.7.5-.9L12 11l9.5-5.9c.3.2.5.5.5.9z"/>
+                        </svg>
+                    </span>
+                    <span class="node-label">MAIL</span>
+                </button>
+            </div>
+
+            <!-- Core arc reactor with SVG tech markings -->
+            <div class="core-wrap" id="triggerMic">
+                <svg class="core-hud-overlay" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="96" stroke="var(--v2)" stroke-width="0.5" fill="none" stroke-dasharray="4, 12" opacity="0.3"/>
+                    <circle cx="100" cy="100" r="88" stroke="var(--v1)" stroke-width="1.2" fill="none" stroke-dasharray="80, 20, 10, 40" opacity="0.6"/>
+                    <circle cx="100" cy="100" r="74" stroke="var(--p2)" stroke-width="0.8" fill="none" stroke-dasharray="2, 6" opacity="0.4"/>
+                    <!-- Technical ticks and lines -->
+                    <line x1="100" y1="4" x2="100" y2="16" stroke="var(--v2)" stroke-width="1" opacity="0.6"/>
+                    <line x1="100" y1="184" x2="100" y2="196" stroke="var(--v2)" stroke-width="1" opacity="0.6"/>
+                    <line x1="4" y1="100" x2="16" y2="100" stroke="var(--v2)" stroke-width="1" opacity="0.6"/>
+                    <line x1="184" y1="100" x2="196" y2="100" stroke="var(--v2)" stroke-width="1" opacity="0.6"/>
+                    <!-- Angle markers -->
+                    <text x="100" y="24" font-size="6" fill="var(--v3)" text-anchor="middle" font-family="var(--font-m)" opacity="0.5">000°</text>
+                    <text x="176" y="102" font-size="6" fill="var(--v3)" text-anchor="start" font-family="var(--font-m)" opacity="0.5">090°</text>
+                    <text x="100" y="180" font-size="6" fill="var(--v3)" text-anchor="middle" font-family="var(--font-m)" opacity="0.5">180°</text>
+                    <text x="24" y="102" font-size="6" fill="var(--v3)" text-anchor="end" font-family="var(--font-m)" opacity="0.5">270°</text>
+                </svg>
+                <div class="core-ring cr-outer"></div>
+                <div class="core-ring cr-mid"></div>
+                <div class="core-ring cr-inner"></div>
+                <div class="core-hex ch1"></div>
+                <div class="core-hex ch2"></div>
+                <div class="core-hex ch3"></div>
+                <div class="core-ball" id="coreGlow">
+                    <div class="core-inner-pulse"></div>
+                </div>
+                <div class="saturn-ring"></div>
+            </div>
+
+            <!-- Waveform (below reactor) -->
+            <div class="waveform" id="waveform">
+                <div class="wbar" style="--i:1"></div><div class="wbar" style="--i:2"></div>
+                <div class="wbar" style="--i:3"></div><div class="wbar" style="--i:4"></div>
+                <div class="wbar" style="--i:5"></div><div class="wbar" style="--i:6"></div>
+                <div class="wbar" style="--i:7"></div><div class="wbar" style="--i:8"></div>
+                <div class="wbar" style="--i:9"></div><div class="wbar" style="--i:10"></div>
+                <div class="wbar" style="--i:11"></div><div class="wbar" style="--i:12"></div>
+                <div class="wbar" style="--i:13"></div><div class="wbar" style="--i:14"></div>
+                <div class="wbar" style="--i:15"></div><div class="wbar" style="--i:16"></div>
+            </div>
+
+            <!-- Title below reactor -->
+            <div class="reactor-label">
+                <div class="rl-name">J.A.R.V.I.S.</div>
+                <div class="rl-status" id="coreStatus">CLICK REACTOR TO ACTIVATE</div>
+            </div>
+
+        </div>
+
+        <!-- ── FLOATING PANELS ── -->
+
+        <!-- Console Log (left float) -->
+        <div class="float-panel fp-left glass-surface" id="fpConsole">
+            <div class="fp-header">
+                <span class="fp-icon">⬡</span> CONSOLE LOG
+                <span class="fp-collapse" onclick="togglePanel('fpConsole')">−</span>
+            </div>
+            <div class="fp-body">
+                <div class="log-scroll" id="consoleLog">
+                    <p class="le init">&gt; Booting neural core...</p>
+                    <p class="le init">&gt; Auth: Jarvis.v5.0</p>
+                    <p class="le init">&gt; Violet Protocol: ACTIVE</p>
+                    <p class="le resp">&gt; All systems online.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interface Calibration (left float, stacked below Console) -->
+        <div class="float-panel fp-left glass-surface" id="fpControls">
+            <div class="fp-header">
+                <span class="fp-icon">⚙️</span> SYSTEM CONFIG
+                <span class="fp-collapse" onclick="togglePanel('fpControls')">−</span>
+            </div>
+            <div class="fp-body">
+                <div class="ctrl-section">
+                    <span class="ctrl-label">THEME SCHEME</span>
+                    <div class="theme-grid">
+                        <button class="theme-btn active" data-theme="violet" style="--theme-col: #7c3aed;">VIOLET</button>
+                        <button class="theme-btn" data-theme="amber" style="--theme-col: #d97706;">AMBER</button>
+                        <button class="theme-btn" data-theme="emerald" style="--theme-col: #059669;">EMERALD</button>
+                        <button class="theme-btn" data-theme="cyber" style="--theme-col: #2563eb;">CYBER</button>
+                    </div>
+                </div>
+                <hr class="diag-divider">
+                <div class="ctrl-section">
+                    <span class="ctrl-label">COPROCESSOR BACKEND</span>
+                    <div class="select-wrapper">
+                        <select id="backendSelect" class="cmd-input-select">
+                            <option value="qwen3">Qwen 3 (Thinking Model)</option>
+                            <option value="qwen2.5:1.5b" selected>Qwen 2.5 (1.5B - Default)</option>
+                            <option value="gemma3:1b">Gemma 3 (1B - Light)</option>
+                            <option value="phi3">Phi 3 (3.8B - Smart)</option>
+                        </select>
+                    </div>
+                </div>
+                <hr class="diag-divider">
+                <div class="ctrl-section">
+                    <span class="ctrl-label">SPOTIFY INTEGRATION</span>
+                    <div id="spotifyConnected" style="display: none; align-items: center; justify-content: space-between; margin-top: 6px; background: rgba(29, 185, 84, 0.08); border: 1px solid #1db954; padding: 8px; border-radius: 6px;">
+                        <span style="color: #1db954; font-family: var(--font-h); font-size: 0.65rem; letter-spacing: 1px;">CONNECTED: <span id="spotifyUser"></span></span>
+                        <button id="btnDisconnectSpotify" style="background: none; border: none; color: var(--r1); font-family: var(--font-m); font-size: 0.65rem; cursor: pointer;">DISCONNECT</button>
+                    </div>
+                    <div id="spotifyDisconnected" style="display: flex; flex-direction: column; gap: 6px; margin-top: 6px;">
+                        <button class="theme-btn" id="btnConnectSpotify" style="width: 100%; border: 1px solid var(--v2); padding: 8px; font-family: var(--font-h); font-size: 0.7rem; background: rgba(168, 85, 247, 0.08); border-radius: 6px; cursor: pointer; color: var(--text);">LINK SPOTIFY ACCOUNT</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right side stacked panels -->
+        <div class="fp-right-stack">
+            <!-- System Stats (right float) -->
+            <div class="float-panel glass-surface" id="fpStats">
+                <div class="fp-header">
+                    <span class="fp-icon">⬡</span> DIAGNOSTICS
+                    <span class="fp-collapse" onclick="togglePanel('fpStats')">−</span>
+                </div>
+                <div class="fp-body">
+                    <div class="diag-row">
+                        <span class="diag-label">CPU</span>
+                        <div class="diag-bar"><div class="diag-fill" id="cpuBar"></div></div>
+                        <span class="diag-val" id="cpuVal">--</span>
+                    </div>
+                    <div class="diag-row">
+                        <span class="diag-label">MEM</span>
+                        <div class="diag-bar"><div class="diag-fill" id="memBar"></div></div>
+                        <span class="diag-val" id="memVal">--</span>
+                    </div>
+                    <div class="diag-row">
+                        <span class="diag-label">NET</span>
+                        <div class="diag-bar"><div class="diag-fill net-fill" style="width:95%"></div></div>
+                        <span class="diag-val">LIVE</span>
+                    </div>
+                    <hr class="diag-divider">
+                    <div class="diag-row" style="flex-direction: column; align-items: flex-start; gap: 4px; margin-bottom: 12px;">
+                        <span class="diag-label-full" style="font-family: var(--font-h); font-size: 0.5rem; letter-spacing: 2px; color: var(--dim);">NEURAL ACTIVITY</span>
+                        <div class="neural-graph-container" style="width: 100%; height: 50px; background: rgba(168,85,247,0.04); border: 1px solid rgba(168,85,247,0.1); border-radius: 8px; overflow: hidden; position: relative;">
+                            <canvas id="neuralCanvas" style="position: absolute; top:0; left:0; width: 100%; height: 100%;"></canvas>
+                        </div>
+                    </div>
+                    <hr class="diag-divider">
+                    <div class="sys-status-row">
+                        <div class="sys-dot dot-green"></div>
+                        <span>CORE STABLE</span>
+                    </div>
+                    <div class="sys-status-row">
+                        <div class="sys-dot" id="micDot"></div>
+                        <span id="statusText">MIC: IDLE</span>
+                    </div>
+                    <div class="sys-status-row">
+                        <div class="sys-dot" id="ollamaDot" style="background:#fbbf24; box-shadow:0 0 6px #fbbf24"></div>
+                        <span id="ollamaStatus">OLLAMA: CHECKING</span>
+                    </div>
+                    <div class="sys-status-row">
+                        <div class="sys-dot" id="hostingDot" style="background:#fbbf24; box-shadow:0 0 6px #fbbf24"></div>
+                        <span id="hostingStatus">HOSTING: CHECKING</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reminders Widget (below Diagnostics) -->
+            <div class="float-panel glass-surface" id="fpReminders">
+                <div class="fp-header">
+                    <span class="fp-icon">🔔</span> REMINDERS
+                    <span class="fp-collapse" onclick="togglePanel('fpReminders')">−</span>
+                </div>
+                <div class="fp-body">
+                    <div class="reminder-input-row">
+                        <input type="text" id="reminderInput" class="reminder-input" placeholder="Add a reminder..." autocomplete="off" maxlength="80">
+                        <button class="reminder-add-btn" id="reminderAddBtn" title="Add reminder">+</button>
+                    </div>
+                    <div class="reminder-list" id="reminderList">
+                        <!-- Reminders rendered here by JS -->
+                    </div>
+                    <div class="reminder-empty" id="reminderEmpty">
+                        <span>No reminders yet</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── BOTTOM COMMAND BAR ── -->
+        <footer class="command-bar glass-surface">
+            <span class="cmd-prefix">›</span>
+            <input  type="text" id="commandInput" class="cmd-input"
+                    placeholder="COMMAND INTERFACE — TYPE OR SPEAK TO JARVIS..."
+                    autocomplete="off">
+            <button class="cmd-btn" id="micBtn" title="Toggle mic">🎤</button>
+            <button class="cmd-btn primary-btn" id="sendBtn" title="Send">⏎</button>
+        </footer>
+
+    </div>
+
+    <!-- Modular JS Libraries -->
+    <script src="js/api.js?v=11"></script>
+    <script src="js/auth.js?v=11"></script>
+    <script src="js/ui.js?v=11"></script>
+    <script src="js/animations.js?v=11"></script>
+    <script src="js/speech.js?v=11"></script>
+    <script src="js/weather.js?v=11"></script>
+    <script src="js/spotify.js?v=11"></script>
+    <script src="js/app.js?v=11"></script>
+</body>
+</html>
