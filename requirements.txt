@@ -1,6 +1,5 @@
 speechrecognition
 pyttsx3
-pyaudio
 opencv-python
 numpy
 requests
@@ -14,7 +13,6 @@ openai
 sounddevice
 soundfile
 pvporcupine
-playsound
 pyautogui
 psutil
 pymongo
