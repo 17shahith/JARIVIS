@@ -1,0 +1,18 @@
+{"level":"warn","message":"MONGODB_URI is not defined in the environment. Running in standard mock-memory database mode.","timestamp":"2026-07-10T10:09:45.592Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:09:45.598Z"}
+{"level":"info","message":"   J.A.R.V.I.S. Server running on port 8888","timestamp":"2026-07-10T10:09:45.599Z"}
+{"level":"info","message":"   Host URL: http://localhost:8888","timestamp":"2026-07-10T10:09:45.599Z"}
+{"level":"info","message":"   Press Ctrl+C to terminate connection","timestamp":"2026-07-10T10:09:45.599Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:09:45.599Z"}
+{"level":"info","message":"Connected to MongoDB cluster successfully.","timestamp":"2026-07-10T10:11:17.333Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:11:17.338Z"}
+{"level":"info","message":"   J.A.R.V.I.S. Server running on port 8888","timestamp":"2026-07-10T10:11:17.339Z"}
+{"level":"info","message":"   Host URL: http://localhost:8888","timestamp":"2026-07-10T10:11:17.339Z"}
+{"level":"info","message":"   Press Ctrl+C to terminate connection","timestamp":"2026-07-10T10:11:17.339Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:11:17.339Z"}
+{"level":"info","message":"Connected to MongoDB cluster successfully.","timestamp":"2026-07-10T10:20:50.890Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:20:50.900Z"}
+{"level":"info","message":"   J.A.R.V.I.S. Server running on port 8888","timestamp":"2026-07-10T10:20:50.900Z"}
+{"level":"info","message":"   Host URL: http://localhost:8888","timestamp":"2026-07-10T10:20:50.900Z"}
+{"level":"info","message":"   Press Ctrl+C to terminate connection","timestamp":"2026-07-10T10:20:50.901Z"}
+{"level":"info","message":"===================================================","timestamp":"2026-07-10T10:20:50.901Z"}
