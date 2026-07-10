@@ -14,7 +14,7 @@ openai
 sounddevice
 soundfile
 pvporcupine
-playsound
+playsound==1.2.2
 pyautogui
 psutil
 pymongo
