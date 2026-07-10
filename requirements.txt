@@ -20,3 +20,4 @@ psutil
 pymongo
 pinecone
 scikit-learn
+gunicorn
